@@ -5,7 +5,11 @@ import {Home} from './screens';
 
 const App: React.FC = () => (
    <>
-      <StatusBar backgroundColor="transparent" barStyle="dark-content" />
+      <StatusBar
+         backgroundColor="transparent"
+         translucent
+         barStyle="dark-content"
+      />
       <Home />
    </>
 );
