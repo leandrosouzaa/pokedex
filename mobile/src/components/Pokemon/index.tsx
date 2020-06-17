@@ -11,44 +11,52 @@ import {
    ImageView,
 } from './styles';
 
-const Pokemon: React.FC = () => (
-   <>
-      <Container>
-         <TextID>#001</TextID>
-         <TextName>Bulbassaur</TextName>
+interface PokemonData {
+   data: {
+      name: string;
+      id: number;
+   };
+}
 
-         <Content>
-            <View>
-               <TypeContainer>
-                  <TypeText>Grass</TypeText>
-               </TypeContainer>
+const Pokemon: React.FC<PokemonData> = ({data}) => {
+   return (
+      <>
+         <Container>
+            <TextID>#{data.id}</TextID>
+            <TextName>{data.name}</TextName>
 
-               <TypeContainer>
-                  <TypeText>Poison</TypeText>
-               </TypeContainer>
-            </View>
+            <Content>
+               <View>
+                  <TypeContainer>
+                     <TypeText>Grass</TypeText>
+                  </TypeContainer>
 
-            <ImageView
-               source={require('../../assets/images/pokeball.png')}
-               imageStyle={{
-                  opacity: 0.2,
-                  position: 'absolute',
-                  height: 83,
-                  width: 83,
-                  left: undefined,
-                  top: undefined,
-               }}>
-               <Image
-                  style={{height: 80, width: 80}}
-                  source={{
-                     uri:
-                        'https://pokeres.bastionbot.org/images/pokemon/22.png',
-                  }}
-               />
-            </ImageView>
-         </Content>
-      </Container>
-   </>
-);
+                  <TypeContainer>
+                     <TypeText>Poison</TypeText>
+                  </TypeContainer>
+               </View>
+
+               <ImageView
+                  source={require('../../assets/images/pokeball.png')}
+                  imageStyle={{
+                     opacity: 0.2,
+                     position: 'absolute',
+                     height: 83,
+                     width: 83,
+                     left: undefined,
+                     top: undefined,
+                  }}>
+                  <Image
+                     style={{height: 80, width: 80}}
+                     source={{
+                        uri: `https://pokeres.bastionbot.org/images/pokemon/${data.id}.png`,
+                     }}
+                  />
+               </ImageView>
+            </Content>
+         </Container>
+      </>
+   );
+};
 
 export default Pokemon;
