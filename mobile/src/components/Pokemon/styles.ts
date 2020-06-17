@@ -11,19 +11,19 @@ export const TextID = styled.Text`
    opacity: 0.2;
    padding: 16px 16px 0 0;
    text-align: right;
-   font-size: 14px;
+   font-size: 16px;
    font-family: 'CircularStd-Bold';
 `;
 
 export const TextName = styled.Text`
    color: #fff;
    font-family: 'CircularStd-Bold';
-   font-size: 14px;
+   font-size: 16px;
 `;
 
 export const TypeContainer = styled.View`
-   height: 16px;
-   width: 40px;
+   height: 24px;
+   width: 60px;
    background: rgba(255, 255, 255, 0.2);
    border-radius: 38px;
    align-items: center;
@@ -32,7 +32,7 @@ export const TypeContainer = styled.View`
 `;
 
 export const TypeText = styled.Text`
-   font-size: 8px;
+   font-size: 10px;
    font-family: 'CircularStd-Book';
    color: #fff;
 `;
