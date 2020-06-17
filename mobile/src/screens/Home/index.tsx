@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 
-import {Image, FlatList} from 'react-native';
+import {FlatList} from 'react-native';
 
 import api from '../../services/api';
 import {Pokemon} from '../../components';
 
-import {Container, Title, PokeList} from './styles';
+import {Container, Title} from './styles';
 
 interface PokemonProps {
    id: string;
@@ -20,8 +20,6 @@ const Home: React.FC = () => {
    useEffect(() => {
       async function loadPokemons(): Promise<void> {
          const {data} = await api.get(`pokemon?offset=${page * 40}&limit=40`);
-
-         console.log(data);
 
          const formattedPokemons = data.results.map((p: PokemonProps) => {
             return {
@@ -53,7 +51,7 @@ const Home: React.FC = () => {
                marginBottom: 10,
             }}
             data={pokemons}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.id.toString()}
             renderItem={({item}) => <Pokemon data={item} />}
             numColumns={2}
             onEndReached={() => {

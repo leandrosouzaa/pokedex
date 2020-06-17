@@ -13,9 +13,3 @@ export const Title = styled.Text`
    margin-top: ${StatusBar.currentHeight}px;
    padding: 0 0 40px 0;
 `;
-
-export const PokeList = styled.View`
-   flex-direction: row;
-   flex-wrap: wrap;
-   justify-content: space-between;
-`;
