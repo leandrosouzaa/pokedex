@@ -1,11 +1,13 @@
 import styled from 'styled-components/native';
 
 interface ContainerProps {
-   type: string;
+   color: string;
 }
 
 export const Container = styled.View<ContainerProps>`
-   background: #46d7ab;
+   background: ${(props) => {
+      return props.color;
+   }};
    border-radius: 15px;
    width: 49%;
    padding-left: 16px;

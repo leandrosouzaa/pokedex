@@ -3,6 +3,7 @@ import React, {useEffect, useState, useMemo} from 'react';
 
 import {View, Image} from 'react-native';
 
+import getColorByType from '../../utils/getColorByType';
 import api from '../../services/api';
 
 import {
@@ -30,9 +31,11 @@ interface TypeProps {
 
 const Pokemon: React.FC<PokemonData> = ({data}) => {
    const [types, setTypes] = useState<TypeProps[]>([]);
+   const [loading, setLoading] = useState(false);
 
    useEffect(() => {
       async function loadTypes(): Promise<void> {
+         setLoading(true);
          const response = await api.get(`pokemon/${data.id}`);
 
          setTypes(response.data.types);
@@ -41,10 +44,10 @@ const Pokemon: React.FC<PokemonData> = ({data}) => {
       loadTypes();
    }, [data]);
 
-   const primaryType = useMemo(() => {
+   const color = useMemo(() => {
       const type = types.find((t) => t.type === t.type);
-
-      return type?.type.name;
+      setLoading(false);
+      return getColorByType(type?.type.name);
    }, [types]);
 
    const formattedTypes = useMemo(() => {
@@ -59,7 +62,7 @@ const Pokemon: React.FC<PokemonData> = ({data}) => {
 
    return (
       <>
-         <Container type={primaryType || '#FFF'}>
+         <Container color={color}>
             <TextID>#{data.id.padStart(3, '0')}</TextID>
             <TextName>
                {data.name.replace(/^./, data.name[0].toUpperCase())}
