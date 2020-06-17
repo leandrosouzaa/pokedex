@@ -1,6 +1,10 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+interface ContainerProps {
+   type: string;
+}
+
+export const Container = styled.View<ContainerProps>`
    background: #46d7ab;
    border-radius: 15px;
    width: 49%;

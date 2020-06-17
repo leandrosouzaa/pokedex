@@ -1,6 +1,10 @@
-import React from 'react';
+/* eslint-disable no-self-compare */
+import React, {useEffect, useState, useMemo} from 'react';
 
 import {View, Image} from 'react-native';
+
+import api from '../../services/api';
+
 import {
    Container,
    TextID,
@@ -14,26 +18,60 @@ import {
 interface PokemonData {
    data: {
       name: string;
-      id: number;
+      id: string;
+   };
+}
+
+interface TypeProps {
+   type: {
+      name: string;
    };
 }
 
 const Pokemon: React.FC<PokemonData> = ({data}) => {
+   const [types, setTypes] = useState<TypeProps[]>([]);
+
+   useEffect(() => {
+      async function loadTypes(): Promise<void> {
+         const response = await api.get(`pokemon/${data.id}`);
+
+         setTypes(response.data.types);
+      }
+
+      loadTypes();
+   }, [data]);
+
+   const primaryType = useMemo(() => {
+      const type = types.find((t) => t.type === t.type);
+
+      return type?.type.name;
+   }, [types]);
+
+   const formattedTypes = useMemo(() => {
+      const formatted = types.map(({type}) => {
+         return {
+            name: type.name.replace(/^./, type.name[0].toUpperCase()),
+         };
+      });
+
+      return formatted;
+   }, [types]);
+
    return (
       <>
-         <Container>
-            <TextID>#{data.id}</TextID>
-            <TextName>{data.name}</TextName>
+         <Container type={primaryType || '#FFF'}>
+            <TextID>#{data.id.padStart(3, '0')}</TextID>
+            <TextName>
+               {data.name.replace(/^./, data.name[0].toUpperCase())}
+            </TextName>
 
             <Content>
                <View>
-                  <TypeContainer>
-                     <TypeText>Grass</TypeText>
-                  </TypeContainer>
-
-                  <TypeContainer>
-                     <TypeText>Poison</TypeText>
-                  </TypeContainer>
+                  {formattedTypes.map((t) => (
+                     <TypeContainer key={t.name}>
+                        <TypeText>{t.name}</TypeText>
+                     </TypeContainer>
+                  ))}
                </View>
 
                <ImageView
