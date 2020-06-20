@@ -1,5 +1,4 @@
-/* eslint-disable no-self-compare */
-import React, {useEffect, useState, useMemo} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {View, Image} from 'react-native';
 
@@ -24,45 +23,34 @@ interface PokemonData {
 }
 
 interface TypeProps {
-   type: {
-      name: string;
-   };
+   name: string;
 }
 
 const Pokemon: React.FC<PokemonData> = ({data}) => {
    const [types, setTypes] = useState<TypeProps[]>([]);
-   const [loading, setLoading] = useState(false);
+   const [color, setColor] = useState('');
 
    useEffect(() => {
       async function loadTypes(): Promise<void> {
-         setLoading(true);
-         const response = await api.get(`pokemon/${data.id}`);
+         const response = await api.get(`/pokemon/${data.id}`);
 
-         setTypes(response.data.types);
+         const formatted = response.data.types.map(({type}) => {
+            return {
+               name: type.name.replace(/^./, type.name[0].toUpperCase()),
+            };
+         });
+
+         setColor(getColorByType(formatted[0].name));
+
+         setTypes(formatted);
       }
 
       loadTypes();
    }, [data]);
 
-   const color = useMemo(() => {
-      const type = types.find((t) => t.type === t.type);
-      setLoading(false);
-      return getColorByType(type?.type.name);
-   }, [types]);
-
-   const formattedTypes = useMemo(() => {
-      const formatted = types.map(({type}) => {
-         return {
-            name: type.name.replace(/^./, type.name[0].toUpperCase()),
-         };
-      });
-
-      return formatted;
-   }, [types]);
-
    return (
       <>
-         <Container color={color}>
+         <Container color={color || '#f2f2f2'}>
             <TextID>#{data.id.padStart(3, '0')}</TextID>
             <TextName>
                {data.name.replace(/^./, data.name[0].toUpperCase())}
@@ -70,7 +58,7 @@ const Pokemon: React.FC<PokemonData> = ({data}) => {
 
             <Content>
                <View>
-                  {formattedTypes.map((t) => (
+                  {types.map((t) => (
                      <TypeContainer key={t.name}>
                         <TypeText>{t.name}</TypeText>
                      </TypeContainer>
@@ -88,7 +76,7 @@ const Pokemon: React.FC<PokemonData> = ({data}) => {
                      top: undefined,
                   }}>
                   <Image
-                     style={{height: 80, width: 80}}
+                     style={{height: 85, width: 85}}
                      source={{
                         uri: `https://pokeres.bastionbot.org/images/pokemon/${data.id}.png`,
                      }}
