@@ -1,10 +1,11 @@
 import styled from 'styled-components/native';
+import {RectButton} from 'react-native-gesture-handler';
 
 interface ContainerProps {
    color: string;
 }
 
-export const Container = styled.View<ContainerProps>`
+export const Container = styled(RectButton)<ContainerProps>`
    background: ${(props) => {
       return props.color;
    }};

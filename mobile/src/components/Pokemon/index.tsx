@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
 
 import {View, Image} from 'react-native';
+import {SharedElement} from 'react-navigation-shared-element';
 
+import {useNavigation} from '@react-navigation/native';
 import getColorByType from '../../utils/getColorByType';
 import api from '../../services/api';
 
@@ -29,6 +31,7 @@ interface TypeProps {
 const Pokemon: React.FC<PokemonData> = ({data}) => {
    const [types, setTypes] = useState<TypeProps[]>([]);
    const [color, setColor] = useState('');
+   const {navigate} = useNavigation();
 
    useEffect(() => {
       async function loadTypes(): Promise<void> {
@@ -49,42 +52,44 @@ const Pokemon: React.FC<PokemonData> = ({data}) => {
    }, [data]);
 
    return (
-      <>
-         <Container color={color || '#f2f2f2'}>
-            <TextID>#{data.id.padStart(3, '0')}</TextID>
-            <TextName>
-               {data.name.replace(/^./, data.name[0].toUpperCase())}
-            </TextName>
+      <Container
+         color={color || '#f2f2f2'}
+         onPress={() => navigate('Detail', {data})}>
+         <TextID>#{data.id.padStart(3, '0')}</TextID>
+         <TextName>
+            {data.name.replace(/^./, data.name[0].toUpperCase())}
+         </TextName>
 
-            <Content>
-               <View>
-                  {types.map((t) => (
-                     <TypeContainer key={t.name}>
-                        <TypeText>{t.name}</TypeText>
-                     </TypeContainer>
-                  ))}
-               </View>
+         <Content>
+            <View>
+               {types.map((t) => (
+                  <TypeContainer key={t.name}>
+                     <TypeText>{t.name}</TypeText>
+                  </TypeContainer>
+               ))}
+            </View>
 
-               <ImageView
-                  source={require('../../assets/images/pokeball.png')}
-                  imageStyle={{
-                     opacity: 0.2,
-                     position: 'absolute',
-                     height: 83,
-                     width: 83,
-                     left: undefined,
-                     top: undefined,
-                  }}>
+            <ImageView
+               source={require('../../assets/images/pokeball.png')}
+               imageStyle={{
+                  opacity: 0.2,
+                  position: 'absolute',
+                  height: 83,
+                  width: 83,
+                  left: undefined,
+                  top: undefined,
+               }}>
+               <SharedElement id={`pokemon-photo-${data.id}`}>
                   <Image
                      style={{height: 85, width: 85}}
                      source={{
                         uri: `https://pokeres.bastionbot.org/images/pokemon/${data.id}.png`,
                      }}
                   />
-               </ImageView>
-            </Content>
-         </Container>
-      </>
+               </SharedElement>
+            </ImageView>
+         </Content>
+      </Container>
    );
 };
 
