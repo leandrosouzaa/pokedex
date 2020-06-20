@@ -4,7 +4,7 @@ import {StatusBar} from 'react-native';
 export const Container = styled.ImageBackground`
    flex: 1;
    background: #ffffff;
-   padding: 40px 16px 0 16px;
+   padding: 40px 8px 0 8px;
 `;
 
 export const Title = styled.Text`
