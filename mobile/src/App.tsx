@@ -1,7 +1,10 @@
+import 'react-native-gesture-handler';
+
 import React from 'react';
 
 import {StatusBar} from 'react-native';
-import {Home} from './screens';
+
+import AppRoutes from './routes/app.routes';
 
 const App: React.FC = () => (
    <>
@@ -10,7 +13,7 @@ const App: React.FC = () => (
          translucent
          barStyle="dark-content"
       />
-      <Home />
+      <AppRoutes />
    </>
 );
 

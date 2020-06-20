@@ -77,6 +77,8 @@ target 'mobile' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+  pod 'RNSharedElement', :path => '../node_modules/react-native-shared-element'
+
   target 'mobileTests' do
     inherit! :complete
     # Pods for testing
