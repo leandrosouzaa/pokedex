@@ -25,6 +25,7 @@
    },
    "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
    "rules": {
+      "global-require": "off",
       "no-unused-expressions": "off",
       "react/jsx-props-no-spreading": "off",
       "prettier/prettier": "error",

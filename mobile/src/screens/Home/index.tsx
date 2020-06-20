@@ -32,6 +32,7 @@ const Home: React.FC = () => {
       }
 
       loadPokemons();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [page]);
 
    return (
