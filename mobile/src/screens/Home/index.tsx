@@ -19,7 +19,7 @@ const Home: React.FC = () => {
 
    useEffect(() => {
       async function loadPokemons(): Promise<void> {
-         const {data} = await api.get(`pokemon?offset=${page * 40}&limit=40`);
+         const {data} = await api.get(`pokemon?offset=${page * 30}&limit=30`);
 
          const formattedPokemons = data.results.map((p: PokemonProps) => {
             return {
