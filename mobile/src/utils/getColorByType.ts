@@ -2,75 +2,75 @@ export default function getColorByType(type: string): string {
    let color;
 
    switch (type) {
-      case 'bug':
+      case 'Bug':
          color = '#72e072';
          break;
 
-      case 'dark':
+      case 'Dark':
          color = '#7c7c7c';
          break;
 
-      case 'dragon':
+      case 'Dragon':
          color = '#47d1d1';
          break;
 
-      case 'electric':
+      case 'Electric':
          color = '#ffce4b';
          break;
 
-      case 'fairy':
+      case 'Fairy':
          color = '#ff66a3';
          break;
 
-      case 'fighting':
+      case 'Fighting':
          color = '#ffa366';
          break;
 
-      case 'fire':
+      case 'Fire':
          color = '#f7786b';
          break;
 
-      case 'flying':
+      case 'Flying':
          color = '#538cc6';
          break;
 
-      case 'ghost':
+      case 'Ghost':
          color = ' #7575a3';
          break;
 
-      case 'grass':
+      case 'Grass':
          color = '#48d0b0';
          break;
 
-      case 'ground':
+      case 'Ground':
          color = ' #c68c53';
          break;
 
-      case 'ice':
+      case 'Ice':
          color = '#66e0ff';
          break;
 
-      case 'normal':
+      case 'Normal':
          color = ' #d2a679';
          break;
 
-      case 'poison':
+      case 'Poison':
          color = ' #7c538c';
          break;
 
-      case 'psychic':
+      case 'Psychic':
          color = ' #ff80b3';
          break;
 
-      case 'rock':
+      case 'Rock':
          color = ' #b1736c';
          break;
 
-      case 'steel':
+      case 'Steel':
          color = '#85adad';
          break;
 
-      case 'water':
+      case 'Water':
          color = '#58abf6';
          break;
 
