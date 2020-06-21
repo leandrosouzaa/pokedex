@@ -54,12 +54,15 @@ const Pokemon: React.FC<PokemonData> = ({data}) => {
    return (
       <Container
          color={color || '#f2f2f2'}
-         onPress={() => navigate('Detail', {data})}>
-         <TextID>#{data.id.padStart(3, '0')}</TextID>
-         <TextName>
-            {data.name.replace(/^./, data.name[0].toUpperCase())}
-         </TextName>
-
+         onPress={() => navigate('Detail', {data, color})}>
+         <SharedElement id={`pokemon-id-${data.id}`}>
+            <TextID>#{data.id.padStart(3, '0')}</TextID>
+         </SharedElement>
+         <SharedElement id={`pokemon-title-${data.id}`}>
+            <TextName>
+               {data.name.replace(/^./, data.name[0].toUpperCase())}
+            </TextName>
+         </SharedElement>
          <Content>
             <View>
                {types.map((t) => (
@@ -68,7 +71,6 @@ const Pokemon: React.FC<PokemonData> = ({data}) => {
                   </TypeContainer>
                ))}
             </View>
-
             <ImageView
                source={require('../../assets/images/pokeball.png')}
                imageStyle={{

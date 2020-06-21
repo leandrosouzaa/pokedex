@@ -21,6 +21,14 @@ const Routes: React.FC = () => {
                         id: `pokemon-photo-${data.id}`,
                         animation: 'move',
                      },
+                     {
+                        id: `pokemon-title-${data.id}`,
+                        animation: 'fade',
+                     },
+                     {
+                        id: `pokemon-id-${data.id}`,
+                        animation: 'fade',
+                     },
                   ];
                }}
                component={Detail}
