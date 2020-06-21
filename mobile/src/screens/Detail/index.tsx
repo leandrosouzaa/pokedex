@@ -32,7 +32,15 @@ const Detail: React.FC = () => {
 
    return (
       <Container>
-         <PokemonInfo color={color}>
+         <PokemonInfo
+            source={require('../../assets/images/Element.png')}
+            color={color}
+            imageStyle={{
+               opacity: 0.6,
+               right: 40,
+               top: 0,
+               marginRight: 20,
+            }}>
             <TouchableOpacity activeOpacity={0.8} onPress={() => goBack()}>
                <Icon size={24} color="#fff" name="arrow-left" />
             </TouchableOpacity>
@@ -52,12 +60,21 @@ const Detail: React.FC = () => {
                   <Id>#{data.id.toString().padStart(3, '0')}</Id>
                </SharedElement>
             </PokemonGrid>
-            <PokemonPicture>
+            <PokemonPicture
+               // source={require('../../assets/images/pokeball.png')}
+               imageStyle={{
+                  width: 170,
+                  opacity: 0.3,
+                  left: undefined,
+                  right: undefined,
+                  top: 30,
+               }}>
                <SharedElement id={`pokemon-photo-${data.id}`}>
                   <Image
                      style={{
                         height: 224,
                         width: 224,
+                        marginBottom: -32,
                      }}
                      source={{
                         uri: `https://pokeres.bastionbot.org/images/pokemon/${data.id}.png`,

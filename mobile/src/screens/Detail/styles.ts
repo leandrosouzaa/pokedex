@@ -8,7 +8,7 @@ export const Container = styled.View`
    flex: 1;
 `;
 
-export const PokemonInfo = styled.View<PokemonInfoProps>`
+export const PokemonInfo = styled.ImageBackground<PokemonInfoProps>`
    padding: 80px 24px 0 24px;
 
    background: ${(props) => props.color};
@@ -49,7 +49,6 @@ export const Id = styled.Text`
    line-height: 50px;
 `;
 
-export const PokemonPicture = styled.View`
+export const PokemonPicture = styled.ImageBackground`
    align-items: center;
-   margin-bottom: -32px;
 `;
