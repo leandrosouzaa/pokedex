@@ -53,6 +53,7 @@ const Pokemon: React.FC<PokemonData> = ({data}) => {
 
    return (
       <Container
+         enabled={!!color}
          color={color || '#f2f2f2'}
          onPress={() => navigate('Detail', {data, color})}>
          <SharedElement id={`pokemon-id-${data.id}`}>
