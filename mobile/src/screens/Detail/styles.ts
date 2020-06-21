@@ -49,6 +49,6 @@ export const Id = styled.Text`
    line-height: 50px;
 `;
 
-export const PokemonPicture = styled.ImageBackground`
+export const PokemonPicture = styled.View`
    align-items: center;
 `;

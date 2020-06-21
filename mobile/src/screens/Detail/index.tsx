@@ -60,15 +60,7 @@ const Detail: React.FC = () => {
                   <Id>#{data.id.toString().padStart(3, '0')}</Id>
                </SharedElement>
             </PokemonGrid>
-            <PokemonPicture
-               // source={require('../../assets/images/pokeball.png')}
-               imageStyle={{
-                  width: 170,
-                  opacity: 0.3,
-                  left: undefined,
-                  right: undefined,
-                  top: 30,
-               }}>
+            <PokemonPicture>
                <SharedElement id={`pokemon-photo-${data.id}`}>
                   <Image
                      style={{
