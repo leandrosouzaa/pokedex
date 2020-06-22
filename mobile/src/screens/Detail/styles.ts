@@ -33,7 +33,7 @@ export const TypeContainer = styled.View`
    border-radius: 38px;
    align-items: center;
    justify-content: center;
-   margin-right: 8px;
+   margin: 8px 8px 0 0;
 `;
 
 export const TypeText = styled.Text`
