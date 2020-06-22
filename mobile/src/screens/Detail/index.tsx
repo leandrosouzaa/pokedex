@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {useRoute, useNavigation} from '@react-navigation/native';
 import {Image, View, TouchableOpacity} from 'react-native';
 import {SharedElement} from 'react-navigation-shared-element';
 import Icon from 'react-native-vector-icons/Feather';
+import {Tab, Tabs} from 'native-base';
+
+import {About, BaseStats, Evolution} from './tabs';
 
 import {
    Container,
@@ -14,6 +17,7 @@ import {
    Id,
    PokemonGrid,
    PokemonPicture,
+   TabsContainer,
 } from './styles';
 
 interface RouteParamsProps {
@@ -30,11 +34,10 @@ interface RouteParamsProps {
 const Detail: React.FC = () => {
    const {params} = useRoute();
    const {goBack} = useNavigation();
-
    const {data, color, types} = params as RouteParamsProps;
 
    return (
-      <Container>
+      <Container color={color}>
          <PokemonInfo
             source={require('../../assets/images/Element.png')}
             color={color}
@@ -72,7 +75,6 @@ const Detail: React.FC = () => {
                      style={{
                         height: 224,
                         width: 224,
-                        marginBottom: -32,
                      }}
                      source={{
                         uri: `https://pokeres.bastionbot.org/images/pokemon/${data.id}.png`,
@@ -81,6 +83,25 @@ const Detail: React.FC = () => {
                </SharedElement>
             </PokemonPicture>
          </PokemonInfo>
+         <View
+            style={{
+               borderRadius: 25,
+               paddingTop: 50,
+               backgroundColor: '#FFF',
+               flex: 1,
+            }}>
+            {/* <Tabs>
+               <Tab heading="About">
+                  <About />
+               </Tab>
+               <Tab heading="Base States">
+                  <BaseStats />
+               </Tab>
+               <Tab heading="Evolution">
+                  <Evolution />
+               </Tab>
+            </Tabs> */}
+         </View>
       </Container>
    );
 };

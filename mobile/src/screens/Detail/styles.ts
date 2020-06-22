@@ -4,7 +4,8 @@ interface PokemonInfoProps {
    color: string;
 }
 
-export const Container = styled.View`
+export const Container = styled.View<PokemonInfoProps>`
+   background: ${(props) => props.color};
    flex: 1;
 `;
 
