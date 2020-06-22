@@ -22,13 +22,16 @@ interface RouteParamsProps {
       name: string;
    };
    color: string;
+   types: {
+      name: string;
+   }[];
 }
 
 const Detail: React.FC = () => {
    const {params} = useRoute();
    const {goBack} = useNavigation();
 
-   const {data, color} = params as RouteParamsProps;
+   const {data, color, types} = params as RouteParamsProps;
 
    return (
       <Container>
@@ -51,10 +54,13 @@ const Detail: React.FC = () => {
                         {data.name.replace(/^./, data.name[0].toUpperCase())}
                      </Name>
                   </SharedElement>
-
-                  <TypeContainer>
-                     <TypeText>Grass</TypeText>
-                  </TypeContainer>
+                  <View style={{flexDirection: 'row'}}>
+                     {types.map((t) => (
+                        <TypeContainer key={t.name}>
+                           <TypeText>{t.name}</TypeText>
+                        </TypeContainer>
+                     ))}
+                  </View>
                </View>
                <SharedElement id={`pokemon-id-${data.id}`}>
                   <Id>#{data.id.toString().padStart(3, '0')}</Id>

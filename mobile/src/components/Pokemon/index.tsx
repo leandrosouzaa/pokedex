@@ -55,7 +55,7 @@ const Pokemon: React.FC<PokemonData> = ({data}) => {
       <Container
          enabled={!!color}
          color={color || '#f2f2f2'}
-         onPress={() => navigate('Detail', {data, color})}>
+         onPress={() => navigate('Detail', {data, color, types})}>
          <SharedElement id={`pokemon-id-${data.id}`}>
             <TextID>#{data.id.padStart(3, '0')}</TextID>
          </SharedElement>
