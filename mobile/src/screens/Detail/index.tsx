@@ -17,7 +17,7 @@ import {
    Id,
    PokemonGrid,
    PokemonPicture,
-   TabsContainer,
+   PokemonHeader,
 } from './styles';
 
 interface RouteParamsProps {
@@ -38,7 +38,7 @@ const Detail: React.FC = () => {
 
    return (
       <Container color={color}>
-         <PokemonInfo
+         <PokemonHeader
             source={require('../../assets/images/Element.png')}
             color={color}
             imageStyle={{
@@ -69,15 +69,8 @@ const Detail: React.FC = () => {
                   <Id>#{data.id.toString().padStart(3, '0')}</Id>
                </SharedElement>
             </PokemonGrid>
-         </PokemonInfo>
-         <View
-            style={{
-               borderRadius: 25,
-               paddingTop: 50,
-               backgroundColor: '#FFF',
-               flex: 1,
-               paddingHorizontal: 24,
-            }}>
+         </PokemonHeader>
+         <PokemonInfo>
             <PokemonPicture>
                <SharedElement id={`pokemon-photo-${data.id}`}>
                   <Image
@@ -183,7 +176,7 @@ const Detail: React.FC = () => {
                   <Evolution />
                </Tab>
             </Tabs>
-         </View>
+         </PokemonInfo>
       </Container>
    );
 };
