@@ -10,7 +10,7 @@ export const Container = styled.View<PokemonInfoProps>`
 `;
 
 export const PokemonInfo = styled.ImageBackground<PokemonInfoProps>`
-   padding: 80px 24px 0 24px;
+   padding: 80px 24px 224px 24px;
 
    background: ${(props) => props.color};
 `;

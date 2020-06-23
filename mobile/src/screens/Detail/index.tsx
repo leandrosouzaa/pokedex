@@ -4,7 +4,7 @@ import {useRoute, useNavigation} from '@react-navigation/native';
 import {Image, View, TouchableOpacity} from 'react-native';
 import {SharedElement} from 'react-navigation-shared-element';
 import Icon from 'react-native-vector-icons/Feather';
-import {Tab, Tabs} from 'native-base';
+import {Tab, Tabs, ScrollableTab} from 'native-base';
 
 import {About, BaseStats, Evolution} from './tabs';
 
@@ -69,19 +69,6 @@ const Detail: React.FC = () => {
                   <Id>#{data.id.toString().padStart(3, '0')}</Id>
                </SharedElement>
             </PokemonGrid>
-            <PokemonPicture>
-               <SharedElement id={`pokemon-photo-${data.id}`}>
-                  <Image
-                     style={{
-                        height: 224,
-                        width: 224,
-                     }}
-                     source={{
-                        uri: `https://pokeres.bastionbot.org/images/pokemon/${data.id}.png`,
-                     }}
-                  />
-               </SharedElement>
-            </PokemonPicture>
          </PokemonInfo>
          <View
             style={{
@@ -89,18 +76,113 @@ const Detail: React.FC = () => {
                paddingTop: 50,
                backgroundColor: '#FFF',
                flex: 1,
+               paddingHorizontal: 24,
             }}>
-            {/* <Tabs>
-               <Tab heading="About">
+            <PokemonPicture>
+               <SharedElement id={`pokemon-photo-${data.id}`}>
+                  <Image
+                     style={{
+                        height: 224,
+                        width: 224,
+                        marginTop: -248,
+                     }}
+                     source={{
+                        uri: `https://pokeres.bastionbot.org/images/pokemon/${data.id}.png`,
+                     }}
+                  />
+               </SharedElement>
+            </PokemonPicture>
+            <Tabs
+               style={{marginTop: -20}}
+               tabBarUnderlineStyle={{
+                  backgroundColor: color,
+                  borderRadius: 200,
+               }}
+               tabContainerStyle={{
+                  elevation: 0,
+                  height: 50,
+               }}>
+               <Tab
+                  tabStyle={{
+                     backgroundColor: '#fff',
+                     borderColor: '#F4F5F4',
+                     borderBottomWidth: 1,
+                  }}
+                  activeTabStyle={{
+                     backgroundColor: '#fff',
+                  }}
+                  activeTextStyle={{
+                     fontFamily: 'CircularStd-Book',
+                     color: '#303943',
+                  }}
+                  textStyle={{
+                     color: 'rgba(48,57,67, 0.4)',
+                     fontFamily: 'CircularStd-Book',
+                  }}
+                  heading="About">
                   <About />
                </Tab>
-               <Tab heading="Base States">
+               <Tab
+                  tabStyle={{
+                     backgroundColor: '#fff',
+                     borderColor: '#F4F5F4',
+                     borderBottomWidth: 1,
+                  }}
+                  activeTabStyle={{
+                     backgroundColor: '#fff',
+                  }}
+                  activeTextStyle={{
+                     fontFamily: 'CircularStd-Book',
+                     color: '#303943',
+                  }}
+                  textStyle={{
+                     color: 'rgba(48,57,67, 0.4)',
+                     fontFamily: 'CircularStd-Book',
+                  }}
+                  heading="Stats">
                   <BaseStats />
                </Tab>
-               <Tab heading="Evolution">
+               <Tab
+                  tabStyle={{
+                     backgroundColor: '#fff',
+                     borderColor: '#F4F5F4',
+                     borderBottomWidth: 1,
+                  }}
+                  activeTabStyle={{
+                     backgroundColor: '#fff',
+                  }}
+                  activeTextStyle={{
+                     fontFamily: 'CircularStd-Book',
+                     color: '#303943',
+                  }}
+                  textStyle={{
+                     color: 'rgba(48,57,67, 0.4)',
+                     fontFamily: 'CircularStd-Book',
+                  }}
+                  heading="Evolution">
                   <Evolution />
                </Tab>
-            </Tabs> */}
+               <Tab
+                  tabStyle={{
+                     backgroundColor: '#fff',
+                     borderColor: '#F4F5F4',
+                     borderBottomWidth: 1,
+                  }}
+                  activeTabStyle={{
+                     backgroundColor: '#fff',
+                  }}
+                  activeTextStyle={{
+                     fontFamily: 'CircularStd-Book',
+                     color: '#303943',
+                  }}
+                  textStyle={{
+                     color: 'rgba(48,57,67, 0.4)',
+                     fontFamily: 'CircularStd-Book',
+                  }}
+                  heading="Moves">
+                  <Evolution />
+               </Tab>
+            </Tabs>
          </View>
       </Container>
    );
