@@ -7,7 +7,7 @@ export default function getColorByType(type: string): string {
          break;
 
       case 'Dark':
-         color = '#7c7c7c';
+         color = '#565656';
          break;
 
       case 'Dragon':
@@ -35,7 +35,7 @@ export default function getColorByType(type: string): string {
          break;
 
       case 'Ghost':
-         color = ' #7575a3';
+         color = '#7575a3';
          break;
 
       case 'Grass':
@@ -43,7 +43,7 @@ export default function getColorByType(type: string): string {
          break;
 
       case 'Ground':
-         color = ' #c68c53';
+         color = '#c68c53';
          break;
 
       case 'Ice':
@@ -51,19 +51,19 @@ export default function getColorByType(type: string): string {
          break;
 
       case 'Normal':
-         color = ' #d2a679';
+         color = '#d2a679';
          break;
 
       case 'Poison':
-         color = ' #7c538c';
+         color = '#7c538c';
          break;
 
       case 'Psychic':
-         color = ' #ff80b3';
+         color = '#ff80b3';
          break;
 
       case 'Rock':
-         color = ' #b1736c';
+         color = '#b1736c';
          break;
 
       case 'Steel':
