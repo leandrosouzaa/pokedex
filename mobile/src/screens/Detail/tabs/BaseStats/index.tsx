@@ -39,6 +39,12 @@ const BaseStats: React.FC<BaseStatsProps> = ({stats}) => {
       return newStats;
    }, [stats]);
 
+   const totalPoints = useMemo(() => {
+      const sumPoints = stats.reduce((total, s) => total + s.base_stat, 0);
+
+      return sumPoints;
+   }, [stats]);
+
    return (
       <Container>
          <FlatList
@@ -53,6 +59,15 @@ const BaseStats: React.FC<BaseStatsProps> = ({stats}) => {
                   </StatsValueView>
                </StatsGrid>
             )}
+            ListFooterComponent={
+               <StatsGrid>
+                  <StatsTitle>Total</StatsTitle>
+                  <StatsValue>{totalPoints}</StatsValue>
+                  <StatsValueView>
+                     <StatsValueRepresentation value={totalPoints} />
+                  </StatsValueView>
+               </StatsGrid>
+            }
          />
       </Container>
    );
