@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {useRoute, useNavigation} from '@react-navigation/native';
 import {Image, View, TouchableOpacity} from 'react-native';
@@ -6,6 +6,7 @@ import {SharedElement} from 'react-navigation-shared-element';
 import Icon from 'react-native-vector-icons/Feather';
 import {Tab, Tabs, ScrollableTab} from 'native-base';
 
+import api from '../../services/api';
 import {About, BaseStats, Evolution} from './tabs';
 
 import {
@@ -31,10 +32,30 @@ interface RouteParamsProps {
    }[];
 }
 
+interface StatsProps {
+   base_stat: number;
+   effort: number;
+   stat: {
+      name: string;
+   };
+}
+
 const Detail: React.FC = () => {
    const {params} = useRoute();
    const {goBack} = useNavigation();
    const {data, color, types} = params as RouteParamsProps;
+
+   const [stats, setStats] = useState<StatsProps[]>([]);
+
+   useEffect(() => {
+      async function loadData(): Promise<void> {
+         const response = await api.get(`/pokemon/${data.id}`);
+
+         setStats(response.data.stats);
+      }
+
+      loadData();
+   }, [data.id]);
 
    return (
       <Container color={color}>
@@ -100,6 +121,7 @@ const Detail: React.FC = () => {
                      backgroundColor: '#fff',
                      borderColor: '#F4F5F4',
                      borderBottomWidth: 1,
+                     borderTopWidth: 0,
                   }}
                   activeTabStyle={{
                      backgroundColor: '#fff',
@@ -133,7 +155,7 @@ const Detail: React.FC = () => {
                      fontFamily: 'CircularStd-Book',
                   }}
                   heading="Stats">
-                  <BaseStats />
+                  <BaseStats stats={stats} />
                </Tab>
                <Tab
                   tabStyle={{
