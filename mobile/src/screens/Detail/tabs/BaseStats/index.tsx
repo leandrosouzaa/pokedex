@@ -1,6 +1,16 @@
 import React, {useMemo} from 'react';
 import {View, Text} from 'react-native';
 
+import {FlatList} from 'react-native-gesture-handler';
+import {
+   Container,
+   StatsGrid,
+   StatsTitle,
+   StatsValue,
+   StatsValueView,
+   StatsValueRepresentation,
+} from './styles';
+
 interface BaseStatsProps {
    stats: {
       base_stat: number;
@@ -30,11 +40,21 @@ const BaseStats: React.FC<BaseStatsProps> = ({stats}) => {
    }, [stats]);
 
    return (
-      <View>
-         {formattedStats.map((s) => (
-            <Text>{s?.stat.name}</Text>
-         ))}
-      </View>
+      <Container>
+         <FlatList
+            data={formattedStats}
+            keyExtractor={(i) => i.stat.name}
+            renderItem={({item}) => (
+               <StatsGrid>
+                  <StatsTitle>{item.stat.name}</StatsTitle>
+                  <StatsValue>{item.base_stat}</StatsValue>
+                  <StatsValueView>
+                     <StatsValueRepresentation />
+                  </StatsValueView>
+               </StatsGrid>
+            )}
+         />
+      </Container>
    );
 };
 
