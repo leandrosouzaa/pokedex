@@ -40,18 +40,26 @@ interface StatsProps {
    };
 }
 
+interface MeasuresProps {
+   height: number;
+   weight: number;
+}
+
 const Detail: React.FC = () => {
    const {params} = useRoute();
    const {goBack} = useNavigation();
    const {data, color, types} = params as RouteParamsProps;
 
    const [stats, setStats] = useState<StatsProps[]>([]);
+   const [measure, setMeasure] = useState<MeasuresProps>({} as MeasuresProps);
 
    useEffect(() => {
       async function loadData(): Promise<void> {
          const response = await api.get(`/pokemon/${data.id}`);
-
          setStats(response.data.stats);
+
+         const {weight, height} = response.data;
+         setMeasure({height, weight});
       }
 
       loadData();
@@ -135,7 +143,7 @@ const Detail: React.FC = () => {
                      fontFamily: 'CircularStd-Book',
                   }}
                   heading="About">
-                  <About />
+                  <About measure={measure} />
                </Tab>
                <Tab
                   tabStyle={{
