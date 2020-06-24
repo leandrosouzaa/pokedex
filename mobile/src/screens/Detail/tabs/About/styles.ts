@@ -35,9 +35,3 @@ export const MeasureValue = styled.Text`
    font-size: 14px;
    color: rgba(48, 57, 67, 1);
 `;
-
-export const Title = styled.Text`
-   font-family: 'CircularStd-Bold';
-   font-size: 16px;
-   color: #303943;
-`;

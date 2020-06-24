@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 
 import {
    Container,
@@ -7,7 +7,6 @@ import {
    MeasureProps,
    MeasureTitle,
    MeasureValue,
-   Title,
 } from './styles';
 
 interface AboutProps {
@@ -15,24 +14,32 @@ interface AboutProps {
       height: number;
       weight: number;
    };
+   description: string;
 }
 
-const About: React.FC<AboutProps> = ({measure}) => {
+const About: React.FC<AboutProps> = ({measure, description}) => {
+   const formattedMeasure = useMemo(() => {
+      const newMeasure = {
+         ...measure,
+         formattedHeight: `${measure.height / 10} m (${
+            Math.round(3.281 * measure.height) / 10
+         } ft)`,
+         formattedWeight: `${measure.weight / 10} m (${
+            Math.round(3.281 * measure.weight) / 10
+         } ft)`,
+      };
+
+      return newMeasure;
+   }, [measure]);
+
    return (
       <Container>
-         <Description>
-            Bulbasaur can be seen napping in bright sunlight. There is a seed on
-            its back. By soaking up the sun's rays, the seed grows progressively
-            larger.
-         </Description>
+         <Description>{description}</Description>
 
          <MeasureContainer>
             <MeasureProps>
                <MeasureTitle>Height</MeasureTitle>
-               <MeasureValue>
-                  {measure.height / 10} m (
-                  {Math.round(3.281 * measure.height) / 10} ft)
-               </MeasureValue>
+               <MeasureValue>{formattedMeasure.formattedHeight}</MeasureValue>
             </MeasureProps>
             <MeasureProps>
                <MeasureTitle>Weight</MeasureTitle>
@@ -42,7 +49,6 @@ const About: React.FC<AboutProps> = ({measure}) => {
                </MeasureValue>
             </MeasureProps>
          </MeasureContainer>
-         <Title>Breeding</Title>
       </Container>
    );
 };

@@ -45,6 +45,10 @@ interface MeasuresProps {
    weight: number;
 }
 
+interface EggGroupsProps {
+   name: string;
+}
+
 const Detail: React.FC = () => {
    const {params} = useRoute();
    const {goBack} = useNavigation();
@@ -52,6 +56,7 @@ const Detail: React.FC = () => {
 
    const [stats, setStats] = useState<StatsProps[]>([]);
    const [measure, setMeasure] = useState<MeasuresProps>({} as MeasuresProps);
+   const [description, setDescription] = useState<string>('');
 
    useEffect(() => {
       async function loadData(): Promise<void> {
@@ -63,6 +68,23 @@ const Detail: React.FC = () => {
       }
 
       loadData();
+   }, [data.id]);
+
+   useEffect(() => {
+      async function loadSpecieData(): Promise<void> {
+         const response = await api.get(`pokemon-species/${data.id}`);
+
+         const {flavor_text} = response.data.flavor_text_entries[0];
+
+         setDescription(
+            flavor_text
+               .replace(/\n/g, ' ')
+               .replace('\u000c', ' ')
+               .replace('é', 'E'),
+         );
+      }
+
+      loadSpecieData();
    }, [data.id]);
 
    return (
@@ -143,7 +165,7 @@ const Detail: React.FC = () => {
                      fontFamily: 'CircularStd-Book',
                   }}
                   heading="About">
-                  <About measure={measure} />
+                  <About description={description} measure={measure} />
                </Tab>
                <Tab
                   tabStyle={{
