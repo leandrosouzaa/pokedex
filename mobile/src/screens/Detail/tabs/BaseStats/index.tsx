@@ -49,6 +49,7 @@ const BaseStats: React.FC<BaseStatsProps> = ({stats}) => {
       <Container>
          <FlatList
             data={formattedStats}
+            showsVerticalScrollIndicator={false}
             keyExtractor={(i) => i.stat.name}
             renderItem={({item}) => (
                <StatsGrid>

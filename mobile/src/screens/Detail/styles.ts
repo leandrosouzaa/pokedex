@@ -56,6 +56,8 @@ export const PokemonPicture = styled.View`
 
 export const PokemonInfo = styled.View`
    border-radius: 25px;
+   border-bottom-right-radius: 0;
+   border-bottom-left-radius: 0;
    padding-top: 50px;
    background: #fff;
    flex: 1;

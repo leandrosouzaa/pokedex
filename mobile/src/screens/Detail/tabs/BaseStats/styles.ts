@@ -28,7 +28,7 @@ export const StatsValue = styled.Text`
    font-size: 14px;
    color: rgba(48, 57, 67, 1);
    line-height: 28px;
-   width: 25px;
+   width: 35px;
    margin-right: 8px;
 `;
 
