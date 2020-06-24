@@ -64,9 +64,6 @@ const BaseStats: React.FC<BaseStatsProps> = ({stats}) => {
                <StatsGrid>
                   <StatsTitle>Total</StatsTitle>
                   <StatsValue>{totalPoints}</StatsValue>
-                  <StatsValueView>
-                     <StatsValueRepresentation value={totalPoints} />
-                  </StatsValueView>
                </StatsGrid>
             }
          />
