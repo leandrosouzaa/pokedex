@@ -3,7 +3,13 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, Image, ActivityIndicator} from 'react-native';
 import axios from 'axios';
 
-import {Container, PokemonContainer, PokemonName} from './styles';
+import {
+   Container,
+   PokemonContainer,
+   PokemonName,
+   LevelContainer,
+   LevelText,
+} from './styles';
 
 interface EvolutionProps {
    color: string;
@@ -35,7 +41,10 @@ const Evolution: React.FC<EvolutionProps> = ({color, evolutionChain}) => {
             const evoDetails = evoData.evolution_details[0];
 
             evoChain.push({
-               species_name: evoData.species.name,
+               species_name: evoData.species.name.replace(
+                  /^./,
+                  evoData.species.name[0].toUpperCase(),
+               ),
                pokemon_id: evoData.species.url.split('/')[
                   evoData.species.url.split('/').length - 2
                ],
@@ -67,13 +76,14 @@ const Evolution: React.FC<EvolutionProps> = ({color, evolutionChain}) => {
          contentContainerStyle={{alignItems: 'center'}}>
          {evolutionList.map((item, i) => (
             <PokemonContainer>
-               <View>
-                  {i === 0 ||
-                     (i <= evolutionList.length && (
-                        <Text>{item.min_level}</Text>
-                     ))}
-               </View>
-
+               {i === 0 ||
+                  (i <= evolutionList.length && (
+                     <LevelContainer>
+                        <LevelText>
+                           {item.min_level || item.item.name}
+                        </LevelText>
+                     </LevelContainer>
+                  ))}
                <Image
                   style={{height: 100, width: 100}}
                   source={{
