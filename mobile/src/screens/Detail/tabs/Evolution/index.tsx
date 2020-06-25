@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, Image, ActivityIndicator} from 'react-native';
 import axios from 'axios';
 
+import Icon from 'react-native-vector-icons/Feather';
 import {
    Container,
    PokemonContainer,
@@ -32,6 +33,10 @@ const Evolution: React.FC<EvolutionProps> = ({color, evolutionChain}) => {
 
    useEffect(() => {
       async function loadEvolution(): Promise<void> {
+         if (!evolutionChain) {
+            return;
+         }
+
          const response = await axios.get(evolutionChain);
 
          const evoChain = [];
@@ -62,23 +67,16 @@ const Evolution: React.FC<EvolutionProps> = ({color, evolutionChain}) => {
       loadEvolution();
    }, [evolutionChain]);
 
-   if (false) {
-      return (
-         <View>
-            <ActivityIndicator animating size={50} color={color} />
-         </View>
-      );
-   }
-
    return (
       <Container
          showsVerticalScrollIndicator={false}
-         contentContainerStyle={{alignItems: 'center'}}>
+         contentContainerStyle={{alignItems: 'center', paddingBottom: 16}}>
          {evolutionList.map((item, i) => (
             <PokemonContainer>
                {i === 0 ||
                   (i <= evolutionList.length && (
                      <LevelContainer>
+                        <Icon color="#DADADA" name="arrow-down" size={14} />
                         <LevelText>
                            {item.min_level || item.item.name}
                         </LevelText>
