@@ -1,7 +1,19 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, ActivityIndicator} from 'react-native';
 
-const Evolution: React.FC = () => {
+interface EvolutionProps {
+   color: string;
+}
+
+const Evolution: React.FC<EvolutionProps> = ({color}) => {
+   if (1) {
+      return (
+         <View>
+            <ActivityIndicator animating size={50} color={color} />
+         </View>
+      );
+   }
+
    return (
       <View>
          <Text>Evolution</Text>

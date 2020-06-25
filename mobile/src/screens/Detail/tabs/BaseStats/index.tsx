@@ -1,5 +1,6 @@
 import React, {useMemo} from 'react';
-import {View, Text} from 'react-native';
+
+import {ActivityIndicator} from 'react-native';
 
 import {FlatList} from 'react-native-gesture-handler';
 import {
@@ -12,6 +13,7 @@ import {
 } from './styles';
 
 interface BaseStatsProps {
+   color: string;
    stats: {
       base_stat: number;
       effort: number;
@@ -21,7 +23,7 @@ interface BaseStatsProps {
    }[];
 }
 
-const BaseStats: React.FC<BaseStatsProps> = ({stats}) => {
+const BaseStats: React.FC<BaseStatsProps> = ({color, stats}) => {
    const formattedStats = useMemo(() => {
       const newStats = stats.map((s) => {
          if (s.stat.name === 'special-defense') {
@@ -44,6 +46,14 @@ const BaseStats: React.FC<BaseStatsProps> = ({stats}) => {
 
       return sumPoints;
    }, [stats]);
+
+   if (!formattedStats || !totalPoints) {
+      return (
+         <Container>
+            <ActivityIndicator animating size={50} color={color} />
+         </Container>
+      );
+   }
 
    return (
       <Container>

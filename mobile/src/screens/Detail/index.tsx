@@ -198,7 +198,7 @@ const Detail: React.FC = () => {
                      fontFamily: 'CircularStd-Book',
                   }}
                   heading="Stats">
-                  <BaseStats stats={stats} />
+                  <BaseStats color={color} stats={stats} />
                </Tab>
                <Tab
                   tabStyle={{
@@ -218,7 +218,7 @@ const Detail: React.FC = () => {
                      fontFamily: 'CircularStd-Book',
                   }}
                   heading="Evolution">
-                  <Evolution />
+                  <Evolution color={color} />
                </Tab>
                <Tab
                   tabStyle={{
@@ -238,7 +238,7 @@ const Detail: React.FC = () => {
                      fontFamily: 'CircularStd-Book',
                   }}
                   heading="Moves">
-                  <Evolution />
+                  <Evolution color={color} />
                </Tab>
             </Tabs>
          </PokemonInfo>

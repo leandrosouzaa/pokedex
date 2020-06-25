@@ -48,7 +48,7 @@ const About: React.FC<AboutProps> = ({
       return newMeasure;
    }, [measure]);
 
-   if (!formattedMeasure || !description) {
+   if (!formattedMeasure || description) {
       return (
          <Container>
             <ActivityIndicator animating size={50} color={color} />
