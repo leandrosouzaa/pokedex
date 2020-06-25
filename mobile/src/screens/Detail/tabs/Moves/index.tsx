@@ -1,8 +1,9 @@
 import React, {useMemo} from 'react';
 
-import {Text, ActivityIndicator} from 'react-native';
+import {Text, ActivityIndicator, View} from 'react-native';
 
-import {Container} from './styles';
+import {FlatList} from 'react-native-gesture-handler';
+import {Container, MoveTable, MoveTitle, MoveValue} from './styles';
 
 interface MovesProps {
    color: string;
@@ -10,7 +11,7 @@ interface MovesProps {
       name: string;
       learned_at: number;
       learn_method: string;
-   };
+   }[];
 }
 
 const BaseStats: React.FC<MovesProps> = ({color, moves}) => {
@@ -24,7 +25,21 @@ const BaseStats: React.FC<MovesProps> = ({color, moves}) => {
 
    return (
       <Container>
-         <Text>Olá</Text>
+         <MoveTable>
+            <MoveTitle>Name</MoveTitle>
+            <MoveTitle>Learned At</MoveTitle>
+            <MoveTitle>Method</MoveTitle>
+         </MoveTable>
+         <FlatList
+            renderItem={({item}) => (
+               <MoveTable>
+                  <MoveValue>{item.name}</MoveValue>
+                  <MoveValue>{item.learned_at}</MoveValue>
+                  <MoveValue>{item.learn_method}</MoveValue>
+               </MoveTable>
+            )}
+            data={moves}
+         />
       </Container>
    );
 };

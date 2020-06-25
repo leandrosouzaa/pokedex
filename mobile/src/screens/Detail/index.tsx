@@ -4,10 +4,10 @@ import {useRoute, useNavigation} from '@react-navigation/native';
 import {Image, View, TouchableOpacity} from 'react-native';
 import {SharedElement} from 'react-navigation-shared-element';
 import Icon from 'react-native-vector-icons/Feather';
-import {Tab, Tabs, ScrollableTab} from 'native-base';
+import {Tab, Tabs} from 'native-base';
 
 import api from '../../services/api';
-import {About, BaseStats, Evolution} from './tabs';
+import {About, BaseStats, Evolution, Moves} from './tabs';
 
 import {
    Container,
@@ -50,6 +50,12 @@ interface EggProps {
    cycle: string;
 }
 
+interface MoveProps {
+   name: string;
+   learned_at: number;
+   learn_method: string;
+}
+
 const Detail: React.FC = () => {
    const {params} = useRoute();
    const {goBack} = useNavigation();
@@ -60,6 +66,7 @@ const Detail: React.FC = () => {
    const [description, setDescription] = useState<string>('');
    const [eggProps, setEggProps] = useState<EggProps>({} as EggProps);
    const [evolutionChain, setEvolutionChain] = useState<string>('');
+   const [moves, setMoves] = useState<MoveProps[]>([]);
 
    useEffect(() => {
       async function loadData(): Promise<void> {
@@ -68,6 +75,23 @@ const Detail: React.FC = () => {
 
          const {weight, height} = response.data;
          setMeasure({height, weight});
+
+         const formattedMoves = response.data.moves.map(
+            ({move, version_group_details}) => {
+               return {
+                  name: move.name
+                     .replace(/^./, move.name[0].toUpperCase())
+                     .replace('-', ' '),
+                  learned_at: version_group_details[0].level_learned_at,
+                  learn_method: version_group_details[0].move_learn_method.name.replace(
+                     /^./,
+                     version_group_details[0].move_learn_method.name[0].toUpperCase(),
+                  ),
+               };
+            },
+         );
+
+         setMoves(formattedMoves);
       }
 
       loadData();
@@ -241,7 +265,7 @@ const Detail: React.FC = () => {
                      fontFamily: 'CircularStd-Book',
                   }}
                   heading="Moves">
-                  <Evolution color={color} />
+                  <Moves moves={moves} color={color} />
                </Tab>
             </Tabs>
          </PokemonInfo>
