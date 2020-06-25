@@ -59,6 +59,7 @@ const Detail: React.FC = () => {
    const [measure, setMeasure] = useState<MeasuresProps>({} as MeasuresProps);
    const [description, setDescription] = useState<string>('');
    const [eggProps, setEggProps] = useState<EggProps>({} as EggProps);
+   const [evolutionChain, setEvolutionChain] = useState<string>('');
 
    useEffect(() => {
       async function loadData(): Promise<void> {
@@ -75,6 +76,8 @@ const Detail: React.FC = () => {
    useEffect(() => {
       async function loadSpecieData(): Promise<void> {
          const response = await api.get(`pokemon-species/${data.id}`);
+
+         setEvolutionChain(response.data.evolution_chain.url);
 
          const {flavor_text} = response.data.flavor_text_entries[0];
          setDescription(
@@ -218,7 +221,7 @@ const Detail: React.FC = () => {
                      fontFamily: 'CircularStd-Book',
                   }}
                   heading="Evolution">
-                  <Evolution color={color} />
+                  <Evolution evolutionChain={evolutionChain} color={color} />
                </Tab>
                <Tab
                   tabStyle={{
