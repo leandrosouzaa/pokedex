@@ -103,7 +103,11 @@ const Detail: React.FC = () => {
 
          setEvolutionChain(response.data.evolution_chain.url);
 
-         const {flavor_text} = response.data.flavor_text_entries[0];
+         const englishDescription = response.data.flavor_text_entries.find(
+            (i) => i.language.name === 'en',
+         );
+
+         const {flavor_text} = englishDescription;
          setDescription(
             flavor_text
                .replace(/\n/g, ' ')
