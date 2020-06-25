@@ -2,11 +2,15 @@ import React, {useMemo} from 'react';
 
 import {
    Container,
+   Title,
    Description,
    MeasureContainer,
    MeasureProps,
    MeasureTitle,
    MeasureValue,
+   EggContainer,
+   EggTitle,
+   EggValue,
 } from './styles';
 
 interface AboutProps {
@@ -15,9 +19,13 @@ interface AboutProps {
       weight: number;
    };
    description: string;
+   eggProps: {
+      group: string;
+      cycle: string;
+   };
 }
 
-const About: React.FC<AboutProps> = ({measure, description}) => {
+const About: React.FC<AboutProps> = ({measure, description, eggProps}) => {
    const formattedMeasure = useMemo(() => {
       const newMeasure = {
          ...measure,
@@ -39,16 +47,27 @@ const About: React.FC<AboutProps> = ({measure, description}) => {
          <MeasureContainer>
             <MeasureProps>
                <MeasureTitle>Height</MeasureTitle>
-               <MeasureValue>{formattedMeasure.formattedHeight}</MeasureValue>
+               <MeasureValue>
+                  {formattedMeasure.formattedHeight || 0}
+               </MeasureValue>
             </MeasureProps>
             <MeasureProps>
                <MeasureTitle>Weight</MeasureTitle>
                <MeasureValue>
-                  {measure.weight / 10} kg (
-                  {Math.round(2.205 * measure.weight) / 10} lbs)
+                  {formattedMeasure.formattedWeight || 0}
                </MeasureValue>
             </MeasureProps>
          </MeasureContainer>
+         <Title>Breeding</Title>
+         <EggContainer>
+            <EggTitle>Egg Groups</EggTitle>
+            <EggValue>{eggProps.group || 'None'}</EggValue>
+         </EggContainer>
+
+         <EggContainer>
+            <EggTitle>Egg Cycle</EggTitle>
+            <EggValue>{eggProps.cycle || 'None'}</EggValue>
+         </EggContainer>
       </Container>
    );
 };

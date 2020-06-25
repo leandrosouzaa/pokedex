@@ -45,8 +45,9 @@ interface MeasuresProps {
    weight: number;
 }
 
-interface EggGroupsProps {
-   name: string;
+interface EggProps {
+   group: string;
+   cycle: string;
 }
 
 const Detail: React.FC = () => {
@@ -57,6 +58,7 @@ const Detail: React.FC = () => {
    const [stats, setStats] = useState<StatsProps[]>([]);
    const [measure, setMeasure] = useState<MeasuresProps>({} as MeasuresProps);
    const [description, setDescription] = useState<string>('');
+   const [eggProps, setEggProps] = useState<EggProps>({} as EggProps);
 
    useEffect(() => {
       async function loadData(): Promise<void> {
@@ -75,13 +77,19 @@ const Detail: React.FC = () => {
          const response = await api.get(`pokemon-species/${data.id}`);
 
          const {flavor_text} = response.data.flavor_text_entries[0];
-
          setDescription(
             flavor_text
                .replace(/\n/g, ' ')
                .replace('\u000c', ' ')
                .replace('é', 'E'),
          );
+
+         const group = response.data.egg_groups[0].name;
+         const cycle = response.data.egg_groups[1].name;
+         setEggProps({
+            group: group.replace(/^./, group[0].toUpperCase()),
+            cycle: cycle.replace(/^./, cycle[0].toUpperCase()),
+         });
       }
 
       loadSpecieData();
@@ -165,7 +173,11 @@ const Detail: React.FC = () => {
                      fontFamily: 'CircularStd-Book',
                   }}
                   heading="About">
-                  <About description={description} measure={measure} />
+                  <About
+                     description={description}
+                     measure={measure}
+                     eggProps={eggProps}
+                  />
                </Tab>
                <Tab
                   tabStyle={{

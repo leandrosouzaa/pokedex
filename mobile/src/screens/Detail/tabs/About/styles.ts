@@ -5,15 +5,23 @@ export const Container = styled.ScrollView`
    flex: 1;
 `;
 
+export const Title = styled.Text`
+   font-family: 'CircularStd-Bold';
+   font-size: 16px;
+   line-height: 28px;
+   color: rgba(48, 57, 67, 1);
+`;
+
 export const Description = styled.Text`
    font-family: 'CircularStd-Book';
-   color: #303943;
+   color: rgba(48, 57, 67, 1);
    font-size: 14px;
    line-height: 24px;
    text-align: justify;
 `;
+
 export const MeasureContainer = styled.View`
-   margin: 8px 0;
+   margin: 16px 0;
    width: 100%;
    flex-direction: row;
    height: 68px;
@@ -31,6 +39,25 @@ export const MeasureTitle = styled.Text`
 `;
 
 export const MeasureValue = styled.Text`
+   font-family: 'CircularStd-Book';
+   font-size: 14px;
+   color: rgba(48, 57, 67, 1);
+`;
+
+export const EggContainer = styled.View`
+   flex-direction: row;
+   height: 32px;
+   align-items: center;
+`;
+
+export const EggTitle = styled.Text`
+   font-family: 'CircularStd-Book';
+   font-size: 14px;
+   color: rgba(48, 57, 67, 0.6);
+   width: 120px;
+`;
+
+export const EggValue = styled.Text`
    font-family: 'CircularStd-Book';
    font-size: 14px;
    color: rgba(48, 57, 67, 1);
