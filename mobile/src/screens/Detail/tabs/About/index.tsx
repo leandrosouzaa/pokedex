@@ -1,5 +1,7 @@
 import React, {useMemo} from 'react';
 
+import {ActivityIndicator} from 'react-native';
+
 import {
    Container,
    Title,
@@ -14,6 +16,7 @@ import {
 } from './styles';
 
 interface AboutProps {
+   color: string;
    measure: {
       height: number;
       weight: number;
@@ -25,7 +28,12 @@ interface AboutProps {
    };
 }
 
-const About: React.FC<AboutProps> = ({measure, description, eggProps}) => {
+const About: React.FC<AboutProps> = ({
+   color,
+   measure,
+   description,
+   eggProps,
+}) => {
    const formattedMeasure = useMemo(() => {
       const newMeasure = {
          ...measure,
@@ -39,6 +47,14 @@ const About: React.FC<AboutProps> = ({measure, description, eggProps}) => {
 
       return newMeasure;
    }, [measure]);
+
+   if (!formattedMeasure || !description) {
+      return (
+         <Container>
+            <ActivityIndicator animating size={50} color={color} />
+         </Container>
+      );
+   }
 
    return (
       <Container>

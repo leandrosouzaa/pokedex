@@ -174,6 +174,7 @@ const Detail: React.FC = () => {
                   }}
                   heading="About">
                   <About
+                     color={color}
                      description={description}
                      measure={measure}
                      eggProps={eggProps}
