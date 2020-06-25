@@ -1,6 +1,6 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 
-import {Text, ActivityIndicator, View} from 'react-native';
+import {ActivityIndicator} from 'react-native';
 
 import {FlatList} from 'react-native-gesture-handler';
 import {Container, MoveTable, MoveTitle, MoveValue} from './styles';
@@ -31,6 +31,7 @@ const BaseStats: React.FC<MovesProps> = ({color, moves}) => {
             <MoveTitle>Method</MoveTitle>
          </MoveTable>
          <FlatList
+            keyExtractor={(item) => item.name}
             renderItem={({item}) => (
                <MoveTable>
                   <MoveValue>{item.name}</MoveValue>
