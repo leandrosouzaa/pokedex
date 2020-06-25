@@ -20,7 +20,7 @@ interface EvolutionProps {
 interface PokemonEvolutionProps {
    item: {
       name: string;
-   };
+   } | null;
    min_level: string;
    pokemon_id: string;
    species_name: string;
@@ -62,23 +62,32 @@ const Evolution: React.FC<EvolutionProps> = ({color, evolutionChain}) => {
          } while (!!evoData && evoData.hasOwnProperty('evolves_to'));
 
          setEvolutionList(evoChain);
+         console.log(evoChain);
       }
 
       loadEvolution();
    }, [evolutionChain]);
+
+   if (!evolutionChain || !evolutionList) {
+      return (
+         <Container>
+            <ActivityIndicator animating size={50} color={color} />
+         </Container>
+      );
+   }
 
    return (
       <Container
          showsVerticalScrollIndicator={false}
          contentContainerStyle={{alignItems: 'center', paddingBottom: 16}}>
          {evolutionList.map((item, i) => (
-            <PokemonContainer>
+            <PokemonContainer key={item.pokemon_id}>
                {i === 0 ||
                   (i <= evolutionList.length && (
                      <LevelContainer>
                         <Icon color="#DADADA" name="arrow-down" size={14} />
                         <LevelText>
-                           {item.min_level || item.item.name}
+                           {item.min_level || item?.item?.name || 'None'}
                         </LevelText>
                      </LevelContainer>
                   ))}
